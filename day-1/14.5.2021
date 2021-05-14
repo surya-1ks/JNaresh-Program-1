@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+//  print  primes
+long long int N=1000000;
+       long long int seive[1000000];
+   void gen_seive()
+   {
+       
+       
+       for(int i=0;i<N;i++)
+       {
+           seive[i]=1;
+       }
+       
+       seive[0]=seive[1]=0;
+       
+       for(int i=2;i*i<N;i++)
+       {
+           if(seive[i]==1)
+           {
+               for(int j=i*i;j<=N;j+=i)
+               {
+                   seive[j]=0;
+               }
+           }
+       }
+   }
+int main()
+{
+    gen_seive();
+   
+    int n,temp[1000000],c,k=2,i;
+    
+   
+    for(i=2;i<=N;i++)
+    {
+        if(seive[i]==1)
+        {   
+            temp[k]=i;
+            k++;
+        } 
+     
+     
+    }
+    int Q;
+    cin>>Q;
+    while(Q--)
+    {
+   cin>>n;
+   for(i=2 ;i<=k && n!=1 ;i++)
+    {   
+      if (n%temp[i]==0)
+        {  
+            c=0;
+            while(n%temp[i]==0)
+            { 
+                n=n/temp[i];
+                c++;
+            }
+          cout<<temp[i]<<"^"<<c<<"*"; 
+        }
+        
+        
+       
+        
+    }
+   cout<<n<<"\n";
+    }
+    return 0;
+}
